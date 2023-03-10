@@ -1,17 +1,29 @@
-module.exports = async function ({ url, query, body, headers }) {
-    try {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-      let nombre = query["nombre"]; 
-  
-      const response = await fetch(`https://api.github.com/users/${nombre}`);
-      const data = await response.json();
-      const responseString = "Tu usuario de GitHub es: " + nombre + "\n Tu nombre es: " + data.name +
-        "\n Tu url: " + data.html_url + "\n Fecha de creación del repositorio: " + data.created_at;
-        
-      return responseString;
-  
-    } catch (error) { 
-      console.log('MyError:', error);
-      throw error; // Si hay un error, rechazar la promesa
-    }
+module.exports = async function ({ id, url, query, body, headers }) {
+  try {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    let posicion = parseInt(query["index"]);
+    //10.228.58.72:9000/user  
+
+    const response = await fetch(`https://rickandmortyapi.com/api/character`);
+    const data = await response.json();
+    let responseJson = "";
+    console.log("Posicion recibida por el emulador: " + posicion)
+
+      responseJson =
+
+      {
+        "Nombre": data.results[posicion].name,
+        "Especie": data.results[posicion].species,
+        "Estado": data.results[posicion].status,
+        "Avatar": data.results[posicion].image,
+      }
+    
+
+    console.log("Respues enviada al emulador: " + responseJson)
+    return (responseJson)
+
+  } catch (error) {
+    console.log('MyError:', error);
+    throw error; // Si hay un error, rechazar la promesa
   }
+}
