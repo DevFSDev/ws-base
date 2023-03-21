@@ -1,13 +1,15 @@
 module.exports = async function ({ id, url, query, body, headers }) {
   try {
+
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     let posicion = parseInt(query["index"]);
-    //10.228.58.72:9000/user  
+    //10.228.58.72:9000/user 
+    //npm run dev
 
     const response = await fetch(`https://rickandmortyapi.com/api/character`);
     const data = await response.json();
     let responseJson = "";
-    console.log("Posicion recibida por el emulador: " + posicion)
+    console.log("Posicion recibida: " + posicion)
 
       responseJson =
 
@@ -19,11 +21,14 @@ module.exports = async function ({ id, url, query, body, headers }) {
       }
     
 
-    console.log("Respues enviada al emulador: " + responseJson)
+    console.log("Respuesta enviada al emulador: " + responseJson)
     return (responseJson)
+
+    
 
   } catch (error) {
     console.log('MyError:', error);
     throw error; // Si hay un error, rechazar la promesa
   }
+  
 }
