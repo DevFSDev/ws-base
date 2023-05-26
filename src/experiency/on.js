@@ -1,4 +1,3 @@
-const { response } = require('express');
 const mongo = require('nexo-npm-node-mongo');
 
 module.exports = async function ({ id, url, query, body, headers }) {
@@ -18,17 +17,12 @@ module.exports = async function ({ id, url, query, body, headers }) {
     const experiencias = await mongo.client.col('Experiency').find().toArray();
 
     // Buscamos aquella experiencia que esté dentro del rango X e Y establecido por el usuario.
-    let resultado;
     for (let experiencia of experiencias) {
         const bounds = Object.values(experiencia.bounds);
         const [minY, maxY, minX, maxX] = bounds;
 
         // Devolvemos la experiencia encontrada.
-        if (y >= minY && y <= maxY && x >= minX && x <= maxX){
-            console.log(experiencia)
-        }
+        if (y >= minY && y <= maxY && x >= minX && x <= maxX) return experiencia;
 
     }
-
-    return resultado;
 }

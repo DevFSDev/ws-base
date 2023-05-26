@@ -46,6 +46,7 @@ api.get("/experiency", require("./src/experiency/get"))
 api.get("/experiency/list", require("./src/experiency/list"))
 api.get("/experiency/on", require("./src/experiency/on"))
 
+api.get("/colors/all", require("./src/color/get"))
 
 
 api.start();

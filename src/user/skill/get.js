@@ -8,7 +8,6 @@ module.exports = async function ({ id, url, query, body, headers }) {
     // Obtiene el valor de la query 'nickname'.
     let nickName = query["nickname"];
     let minuscultasNickname = nickName.toLowerCase();
-    console.log(nickName)
 
     // Obtiene de la base de datos el usuario que tiene el 'nickname' especificado
     let consultacrud = await mongo.client.col('PersonSkill').findOne({nickname: minuscultasNickname});
